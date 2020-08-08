@@ -8,16 +8,29 @@ function checkCashRegister(price, cash, cid) {
         ["FIVE", 5],
         ["TEN", 10],
         ["TWENTY", 20],
-        ["ONE HUNDRED", 100]]
+        ["ONE HUNDRED", 100]] // si rest plus petit que 100 choisir 20 
 
-    let cashBack = {
-        status: "",
-        change: []
+    let result = {
+        status: "xx",
+        change: ["xx", 0]
     }
 
-    let rest = cash-price
-    console.log(rest)
-    return cashBack;
+    let cashBack = cash - price, cashToGive = 0
+    ////Parcourir la caisse 
+    for (let i = currencyUnit.length - 1; i > 0; i--) {
+        //choisir la monnaie a rendre
+        if (currencyUnit[i][1] < cashBack) {
+            while (cashBack > 0) {
+                cashToGive += currencyUnit[i][1]
+                cashBack -= currencyUnit[i][1]
+            }
+            console.log(cashToGive)
+        }
+    }
+    //si MaRendre ok MaR - Monnaie dans la caisse jusqu'a que la monnaie a rendre = 0
+
+
+    return result
 }
 
 console.log(checkCashRegister(19.5, 20, [["PENNY", 1.01], ["NICKEL", 2.05], ["DIME", 3.1], ["QUARTER", 4.25], ["ONE", 90], ["FIVE", 55], ["TEN", 20], ["TWENTY", 60], ["ONE HUNDRED", 100]]))
